@@ -1,0 +1,10 @@
+extends: standard
+globals:
+  moment: false
+  wx: false
+  expect: true
+env:
+  browser: true
+  node: true
+  jquery: true
+  amd: true
