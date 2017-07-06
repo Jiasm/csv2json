@@ -39,7 +39,7 @@ module.exports = () => {
 
         // loop headers and set value from lineData
         Object.entries(header).forEach(([key, item]) => {
-          lineItem[item] = lineData[key]
+          lineItem[item] = String(lineData[key]).replace(/^"|"$/g, '').replace(/""/g, '"')
         })
 
         lines.push(lineItem)
@@ -61,7 +61,7 @@ module.exports = () => {
 // translate
 function translate (text) {
   // split string with `,`
-  text = text.replace(/"[^"]*(,)+?[^"]*"/, $1 => $1.replace(/,/, '$dot$'))
+  text = text.replace(/"[^"]*(,)+?[^"]*"/, $1 => $1.replace(/,/g, '$dot$'))
   let arr = text.split(',').map((value, index) => ({
     value,
     index
