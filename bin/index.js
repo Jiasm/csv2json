@@ -59,9 +59,10 @@ module.exports = () => {
 }
 
 // translate
-function translate (arr) {
+function translate (text) {
   // split string with `,`
-  arr = arr.split(',').map((value, index) => ({
+  text = text.replace(/"[^"]*(,)+?[^"]*"/, $1 => $1.replace(/,/, '$dot$'))
+  let arr = text.split(',').map((value, index) => ({
     value,
     index
   }))
@@ -73,7 +74,7 @@ function translate (arr) {
 
   // build object with index & text
   arr.forEach(item => {
-    result[item.index] = item.value
+    result[item.index] = String(item.value).replace(/\$dot\$/g, ',')
   })
 
   return result
